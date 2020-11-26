@@ -21,15 +21,11 @@ const getUsers = () => {
     }))
 }
 
-const createUser = () => {
+const createUser = (params) => {
     return (new Promise((resolve, reject) => {
-        const userName = req.body.username;
-        const name = req.body.name;
-        const age = req.body.age;
-
-        const referencePath = '/Users/' + userName + '/';
+        const referencePath = '/Users/' + params.userName + '/';
         const userReference = firebase.database().ref(referencePath);
-        userReference.set({ Name: name, Age: age }, function (error) {
+        userReference.set({ Name: params.name, Age: params.age }, function (error) {
             if (error) {
                 res.send("Data could not be saved." + error);
             } else {
