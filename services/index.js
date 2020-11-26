@@ -20,3 +20,17 @@ const getUsers = () => {
         });
     }))
 }
+
+const createUser = () => {
+
+}
+
+const updateUser = () => {
+
+}
+
+const deleteUser = () => {
+
+}
+
+module.exports = { getUsers, createUser, updateUser, deleteUser }
