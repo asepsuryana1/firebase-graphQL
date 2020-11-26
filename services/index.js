@@ -6,11 +6,17 @@ const getUsers = () => {
     return (new Promise((resolve, reject) => {
         userReference.on("value", function (snapshot) {
             console.log(snapshot.val());
-            res.json(snapshot.val());
+            const folder = snapshot.val();
+            if (folder === null) {
+                resolve([])
+            } else {
+                const data = Object.keys(folder).map(o => Object.assign({ userName: o }, folder[o]))
+                resolve(data);
+            }
             userReference.off("value");
         }, function (errorObject) {
             console.log("The read failed: " + errorObject.code);
-            res.send("The read failed: " + errorObject.code);
+            reject("The read failed: " + errorObject.code);
         });
     }))
 }
