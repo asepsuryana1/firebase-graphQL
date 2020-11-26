@@ -3,6 +3,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var firebase = require('firebase');
+const graphqlHTTP = require("express-graphql");
+const cors = require("cors");
 
 var config = {
     apiKey: 'AIzaSyDXcG2PN2nO1xcLcxW8gtHbomzNP95E7Nc',
@@ -28,5 +30,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+
+const userSchema = require('./graphql').userSchema;
+app.use('/graphql', cors(), graphqlHTTP({
+  schema: userSchema,
+  rootValue: global,
+  graphiql: true
+}));
 
 module.exports = app;
