@@ -35,8 +35,18 @@ const createUser = (params) => {
     }))
 }
 
-const updateUser = () => {
-
+const updateUser = (params) => {
+        var referencePath = '/Users/' + userName + '/';
+    var userReference = firebase.database().ref(referencePath);
+    return (new Promise((resolve, reject) => {
+        userReference.update({ Name: params.name, Age: params.age }, function (error) {
+            if (error) {
+                reject("Data could not be updated." + error);
+            } else {
+                resolve("Data updated successfully.");
+            }
+        });
+    }))
 }
 
 const deleteUser = () => {
