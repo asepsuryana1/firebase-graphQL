@@ -36,21 +36,32 @@ const createUser = (params) => {
 }
 
 const updateUser = (params) => {
-        var referencePath = '/Users/' + userName + '/';
+    var referencePath = '/Users/' + params.userName + '/';
     var userReference = firebase.database().ref(referencePath);
     return (new Promise((resolve, reject) => {
         userReference.update({ Name: params.name, Age: params.age }, function (error) {
             if (error) {
                 reject("Data could not be updated." + error);
             } else {
-                resolve("Data updated successfully.");
+                resolve(params);
             }
         });
     }))
 }
 
-const deleteUser = () => {
-
+const deleteUser = (params) => {
+    var userName = req.params.username;
+    return (new Promise((resolve, reject) => {
+        var referencePath = '/Users/' + paramsuserName + '/';
+        var userReference = firebase.database().ref(referencePath);
+        userReference.remove((error) => {
+            if (error) {
+                reject("Data could not be deleted." + error);
+            } else {
+                resolve(params);
+            }
+        })
+    }))
 }
 
 module.exports = { getUsers, createUser, updateUser, deleteUser }
