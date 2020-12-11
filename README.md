@@ -2,7 +2,7 @@
 ```Mempermudah pengambilan query```
 
 ## Buat folder 
-```grapql`` yang isinya :
+* ## ```grapql``` yang isinya :
 
 * ### mutations
 isinya seperti sql command select 
